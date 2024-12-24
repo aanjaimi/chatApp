@@ -6,7 +6,7 @@ dotenv.config();
 
 const app = express();
 app.use(express.json());
-const allowedOrigins = ['https://chat-app-navy-xi.vercel.app'];
+const allowedOrigins = ['http://localhost:3000', 'https://chat-app-navy-xi.vercel.app'];
 app.use(cors({
   origin: (origin, callback) => {
     if (!origin || allowedOrigins.includes(origin)) {

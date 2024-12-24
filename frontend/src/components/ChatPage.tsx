@@ -1,10 +1,6 @@
 import React from "react";
 import type { User } from "@/app/types";
-import {
-  MultiChatSocket,
-  MultiChatWindow,
-  useMultiChatLogic,
-} from "react-chat-engine-advanced";
+import { useMultiChatLogic } from "react-chat-engine-advanced";
 import { PrettyChatWindow } from "react-chat-engine-pretty";
 
 type ChatPageProps = {
@@ -20,8 +16,6 @@ const ChatPage = (props: ChatPageProps) => {
   return (
     <div className="w-full h-full">
       <PrettyChatWindow {...chatProps} style={{  }}/>
-      {/* <MultiChatWindow {...chatProps} /> */}
-      {/* <MultiChatSocket {...chatProps} /> */}
     </div>
   );
 };
