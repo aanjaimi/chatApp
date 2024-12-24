@@ -30,11 +30,9 @@ const AuthPage = (props: AuthPageProps) => {
     }
     axios.post("https://chatapp-production-58e2.up.railway.app/api/authenticate", { username: username })
     .then((response) => {
-      console.log(response.data);
       props.onAuth({ ...response.data, secret: username });
     })
     .catch((error) => {
-      console.log(error);
       setIsDisabled(false);
     });
   };
