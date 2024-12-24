@@ -35,6 +35,7 @@ const AuthPage = (props: AuthPageProps) => {
     })
     .catch((error) => {
       console.log(error);
+      setIsDisabled(false);
     });
   };
 

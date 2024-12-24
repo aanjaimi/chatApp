@@ -6,11 +6,24 @@ dotenv.config();
 
 const app = express();
 app.use(express.json());
-app.use(cors({ origin: true }));
+const allowedOrigins = ['http://localhost:3000', 'https://chat-app-navy-xi.vercel.app'];
+app.use(cors({
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+    } else {
+        callback(new Error('Not allowed by CORS'));
+    }
+  }
+}));
 
 app.post('/api/authenticate', async (req, res) => {
   const { username } = req.body;
   try{
+    if (!process.env.CHAT_ENGINE_PRIVATE_KEY) {
+      console.error('Error: CHAT_ENGINE_PRIVATE_KEY is not defined in environment variables.');
+      process.exit(1);
+    }  
     const rest = await axios.put('https://api.chatengine.io/users/',
     {username: username, secret: username, firstName: username},
     {headers : { "private-key": process.env.CHAT_ENGINE_PRIVATE_KEY }}
@@ -23,4 +36,5 @@ app.post('/api/authenticate', async (req, res) => {
   }
 });
 
-app.listen(3001, () => console.log('Server running on port 3001'));
+const PORT = process.env.PORT || 3001;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
