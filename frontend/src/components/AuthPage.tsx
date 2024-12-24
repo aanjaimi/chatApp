@@ -18,9 +18,11 @@ type AuthPageProps = {
 
 const AuthPage = (props: AuthPageProps) => {
   const [username, setUsername] = React.useState("");
+  const [isDisabled, setIsDisabled] = React.useState(false);
   const [emptyusername, setEmptyusername] = React.useState(false);
 
   const handleSubmit = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setIsDisabled(true);
     event.preventDefault();
     if (username === "") {
       setEmptyusername(true);
@@ -76,6 +78,7 @@ const AuthPage = (props: AuthPageProps) => {
               handleSubmit(event);
             }}
             className="w-[300px] sm:[200px] bg-black text-white rounded-lg"
+            disabled={isDisabled}
           >
             Enter
           </Button>
