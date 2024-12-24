@@ -28,7 +28,7 @@ const AuthPage = (props: AuthPageProps) => {
       setEmptyusername(true);
       return;
     }
-    axios.post("http://localhost:3001/api/authenticate", { username: username })
+    axios.post("https://chatapp-production-58e2.up.railway.app/api/authenticate", { username: username })
     .then((response) => {
       console.log(response.data);
       props.onAuth({ ...response.data, secret: username });
